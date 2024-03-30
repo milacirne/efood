@@ -1,16 +1,19 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
-import { Image } from '../Category/styles'
+import { Image } from '../CategoryCard/styles'
 
 export const Card = styled.div`
   background-color: ${colors.red};
   color: ${colors.darkBeige};
   padding: 8px;
   font-size: 14px;
+  border-radius: 8px;
 `
 
 export const ProductImage = styled(Image)`
   height: 167px;
+  border-radius: 8px;
+  object-fit: cover;
 `
 
 export const Title = styled.h3`
@@ -23,6 +26,7 @@ export const Title = styled.h3`
 export const Description = styled.p`
   font-weight: 400;
   line-height: 22px;
+  min-height: 176px;
 `
 
 export const Button = styled.button`

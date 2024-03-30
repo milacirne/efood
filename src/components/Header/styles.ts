@@ -43,7 +43,7 @@ export const Banner = styled.div<BannerProps>`
   padding: 24px 170px 32px;
   color: ${colors.white};
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(${({ image }) => image});
+    url(${(props) => props.image});
   background-size: cover;
   background-position: 88% 49%;
 

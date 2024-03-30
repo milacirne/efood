@@ -4,17 +4,18 @@ type Props = {
   image: string
   title: string
   description: string
+  onClick: () => void
 }
 
-const Product = ({ image, title, description }: Props) => {
+const ProductCard = ({ image, title, description, onClick }: Props) => {
   return (
     <S.Card>
       <S.ProductImage src={image} />
       <S.Title>{title}</S.Title>
       <S.Description>{description}</S.Description>
-      <S.Button>Adicionar ao carrinho</S.Button>
+      <S.Button onClick={onClick}>Mais detalhes</S.Button>
     </S.Card>
   )
 }
 
-export default Product
+export default ProductCard

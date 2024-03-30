@@ -11,7 +11,14 @@ type Props = {
   to: string
 }
 
-const Category = ({ image, tags, title, rating, description, to }: Props) => {
+const CategoryCard = ({
+  image,
+  tags,
+  title,
+  rating,
+  description,
+  to
+}: Props) => {
   return (
     <S.Card>
       <S.Image src={image} />
@@ -37,4 +44,4 @@ const Category = ({ image, tags, title, rating, description, to }: Props) => {
   )
 }
 
-export default Category
+export default CategoryCard

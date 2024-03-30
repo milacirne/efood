@@ -12,6 +12,7 @@ export const Image = styled.img`
   width: 100%;
   height: 217px;
   display: block;
+  object-fit: cover;
 `
 
 export const TagsContainer = styled.div`
@@ -62,6 +63,7 @@ export const Description = styled.p`
   font-weight: 400;
   line-height: 22px;
   margin-bottom: 16px;
+  min-height: 110px;
 `
 
 export const Button = styled.button`
