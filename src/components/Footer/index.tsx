@@ -8,11 +8,11 @@ import twitter from '../../assets/footer/twitter.png'
 
 const Footer = () => {
   return (
-    <S.FooterContainer>
+    <S.Container>
       <Link to="/">
         <S.FooterLogo src={logo} />
       </Link>
-      <S.IconsContainer>
+      <ul>
         <li>
           <a>
             <img src={instagram} />
@@ -28,13 +28,13 @@ const Footer = () => {
             <img src={twitter} />
           </a>
         </li>
-      </S.IconsContainer>
-      <S.Text>
+      </ul>
+      <p>
         A efood é uma plataforma para divulgação de estabelecimentos, a
         responsabilidade pela entrega, qualidade <br />
         dos produtos é toda do estabelecimento contratado.
-      </S.Text>
-    </S.FooterContainer>
+      </p>
+    </S.Container>
   )
 }
 

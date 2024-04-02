@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Body from '../../components/Body'
 import Header from '../../components/Header'
+import Banner from '../../components/Banner'
 
 export type ProductType = {
   foto: string
@@ -30,6 +31,7 @@ const Category = () => {
   return (
     <>
       <Header />
+      <Banner />
       <Body
         data={products}
         type="productCards"

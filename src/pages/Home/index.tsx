@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import HomeHeader from '../../components/HomeHeader'
 import Body from '../../components/Body'
+import Header from '../../components/Header'
 
 export type CategoryType = {
   id: number
@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <>
-      <HomeHeader />
+      <Header />
       <Body
         data={categories}
         type="categoryCards"
