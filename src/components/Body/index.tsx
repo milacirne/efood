@@ -1,36 +1,35 @@
 import { useState } from 'react'
 import * as S from './styles'
 import Category from '../CategoryCard'
-import { CategoryType } from '../../pages/Home'
+import { HomeItemType } from '../../pages/Home'
 import Product from '../ProductCard'
 import Modal from '../Modal'
 import { ListProps } from './styles'
-import { ProductType } from '../../pages/Category'
+import { CategoryItemType } from '../../pages/Category'
 
 interface BodyProps extends ListProps {
-  type: 'categoryCards' | 'productCards'
-  data: CategoryType[] | ProductType[]
+  type: 'homeCards' | 'categoryCards'
+  data: HomeItemType[] | CategoryItemType[]
 }
 
 const Body = ({ data, type, columns, rows, columnGap, rowGap }: BodyProps) => {
   const [isVisible, setIsVisible] = useState(false)
-  const [selectedProduct, setSelectedProduct] = useState<ProductType | null>(
-    null
-  )
+  const [selectedProduct, setSelectedProduct] =
+    useState<CategoryItemType | null>(null)
 
-  const handleProductClick = (product: ProductType) => {
-    setSelectedProduct(product)
+  const handleProductClick = (categoryItem: CategoryItemType) => {
+    setSelectedProduct(categoryItem)
     setIsVisible(true)
   }
 
-  const getCategoryTags = (category: CategoryType) => {
+  const getCategoryTags = (homeItem: HomeItemType) => {
     const tags = []
 
-    if (category.tipo) {
-      tags.push(category.tipo)
+    if (homeItem.tipo) {
+      tags.push(homeItem.tipo)
     }
 
-    if (category.destacado) {
+    if (homeItem.destacado) {
       tags.push('Destaque da semana')
     }
 
@@ -45,28 +44,30 @@ const Body = ({ data, type, columns, rows, columnGap, rowGap }: BodyProps) => {
         columnGap={columnGap}
         rowGap={rowGap}
       >
-        {type === 'categoryCards' && data
-          ? (data as CategoryType[]).map((category: CategoryType) => (
+        {type === 'homeCards' && data
+          ? (data as HomeItemType[]).map((homeItem: HomeItemType) => (
               <Category
-                key={category.id}
-                image={category.capa}
-                tags={getCategoryTags(category)}
-                title={category.titulo}
-                rating={category.avaliacao}
-                description={category.descricao}
-                to={`/category/${category.id}`}
+                key={homeItem.id}
+                image={homeItem.capa}
+                tags={getCategoryTags(homeItem)}
+                title={homeItem.titulo}
+                rating={homeItem.avaliacao}
+                description={homeItem.descricao}
+                to={`/category/${homeItem.id}`}
               />
             ))
-          : type === 'productCards' && data
-            ? (data as ProductType[]).map((product: ProductType) => (
-                <Product
-                  key={product.id}
-                  image={product.foto}
-                  title={product.nome}
-                  description={product.descricao}
-                  onClick={() => handleProductClick(product)}
-                />
-              ))
+          : type === 'categoryCards' && data
+            ? (data as CategoryItemType[]).map(
+                (categoryItem: CategoryItemType) => (
+                  <Product
+                    key={categoryItem.id}
+                    image={categoryItem.foto}
+                    title={categoryItem.nome}
+                    description={categoryItem.descricao}
+                    onClick={() => handleProductClick(categoryItem)}
+                  />
+                )
+              )
             : null}
         <Modal
           isVisible={isVisible}

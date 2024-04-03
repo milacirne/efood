@@ -4,7 +4,7 @@ import Body from '../../components/Body'
 import Header from '../../components/Header'
 import Banner from '../../components/Banner'
 
-export type ProductType = {
+export type CategoryItemType = {
   foto: string
   preco: number
   id: number
@@ -15,7 +15,7 @@ export type ProductType = {
 
 const Category = () => {
   const { id } = useParams()
-  const [products, setProducts] = useState<ProductType[]>([])
+  const [products, setProducts] = useState<CategoryItemType[]>([])
 
   useEffect(() => {
     fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
@@ -34,7 +34,7 @@ const Category = () => {
       <Banner />
       <Body
         data={products}
-        type="productCards"
+        type="categoryCards"
         columns="repeat(3, 1fr)"
         rows="repeat(2, auto)"
         columnGap="40px"

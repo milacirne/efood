@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { CategoryType } from '../../pages/Home'
+import { HomeItemType } from '../../pages/Home'
 import { BannerStyle } from './styles'
 
 const Banner = () => {
   const { id } = useParams()
-  const [categories, setCategories] = useState<CategoryType>()
+  const [category, setCategory] = useState<HomeItemType>()
 
   useEffect(() => {
     fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
@@ -15,14 +15,14 @@ const Banner = () => {
         }
         return res.json()
       })
-      .then((data) => setCategories(data))
+      .then((data) => setCategory(data))
   }, [id])
   return (
     <>
-      {categories && (
-        <BannerStyle titleIsBold={false} image={categories?.capa}>
-          <h1>{categories?.tipo}</h1>
-          <h1>{categories?.titulo}</h1>
+      {category && (
+        <BannerStyle titleIsBold={false} image={category?.capa}>
+          <h1>{category?.tipo}</h1>
+          <h1>{category?.titulo}</h1>
         </BannerStyle>
       )}
     </>

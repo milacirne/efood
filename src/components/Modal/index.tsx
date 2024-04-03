@@ -1,11 +1,11 @@
 import * as S from './styles'
 import close from '../../assets/icons/close.png'
-import { ProductType } from '../../pages/Category'
+import { CategoryItemType } from '../../pages/Category'
 
 interface ModalState {
   isVisible: boolean
   onClick: () => void
-  product: ProductType | null
+  product: CategoryItemType | null
 }
 
 const Modal = ({ isVisible, onClick, product }: ModalState) => {
