@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Body from '../../components/Body'
 import Header from '../../components/Header'
 
-export type HomeItemType = {
+export type CategoryType = {
   id: number
   titulo: string
   destacado: boolean
@@ -23,7 +23,7 @@ export type HomeItemType = {
 }
 
 const Home = () => {
-  const [categories, setCategories] = useState<HomeItemType[]>([])
+  const [categories, setCategories] = useState<CategoryType[]>([])
 
   useEffect(() => {
     fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')

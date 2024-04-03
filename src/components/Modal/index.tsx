@@ -32,9 +32,7 @@ const Modal = ({ isVisible, onClick, product }: ModalState) => {
             <br />
             Serve: de {product.porcao}
           </p>
-          <S.ModalButton>
-            Adicionar ao carrinho - {formatPrice(product.preco)}
-          </S.ModalButton>
+          <button>Adicionar ao carrinho - {formatPrice(product.preco)}</button>
         </S.ModalText>
       </S.ModalContent>
       <div className="overlay" onClick={onClick}></div>
