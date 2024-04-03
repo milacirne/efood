@@ -1,19 +1,18 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
 import { Image } from '../CategoryCard/styles'
+import { Button, Description } from '../CategoryCard/styles'
 
 export const Card = styled.div`
   background-color: ${colors.red};
   color: ${colors.darkBeige};
   padding: 8px;
-  font-size: 14px;
   border-radius: 8px;
 `
 
 export const ProductImage = styled(Image)`
   height: 167px;
   border-radius: 8px;
-  object-fit: cover;
 `
 
 export const Title = styled.h3`
@@ -23,25 +22,19 @@ export const Title = styled.h3`
   margin: 8px 0;
 `
 
-export const Description = styled.p`
-  font-weight: 400;
-  line-height: 22px;
+export const ProductDescription = styled(Description)`
   min-height: 176px;
+  margin-bottom: 8px;
 `
 
-export const Button = styled.button`
+export const ProductButton = styled(Button)`
   color: ${colors.red};
   background-color: ${colors.darkBeige};
   width: 100%;
-  font-weight: 700;
-  line-height: 16.41px;
-  cursor: pointer;
   padding: 4px 0;
-  border: none;
-  transition: 0.5s all ease;
-  margin-top: 8px;
 
   &:hover {
     background-color: ${colors.beige};
+    color: ${colors.red};
   }
 `

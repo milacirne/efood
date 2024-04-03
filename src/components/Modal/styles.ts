@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { colors } from '../../styles'
+import { Button } from '../CategoryCard/styles'
 
 export const Modal = styled.div`
   position: fixed;
@@ -66,21 +67,17 @@ export const ModalText = styled.div`
     font-size: 14px;
     line-height: 22px;
   }
+`
 
-  button {
+export const ModalButton = styled(Button)`
+  color: ${colors.red};
+  background-color: ${colors.darkBeige};
+  padding: 4px 6.95px;
+  width: 218px;
+  margin: 0;
+
+  &:hover {
+    background-color: ${colors.beige};
     color: ${colors.red};
-    background-color: ${colors.darkBeige};
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 16.41px;
-    border: none;
-    padding: 4px 6.95px;
-    width: 218px;
-    cursor: pointer;
-    transition: 0.5s all ease;
-
-    &:hover {
-      background-color: ${colors.beige};
-    }
   }
 `

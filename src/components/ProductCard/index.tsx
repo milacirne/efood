@@ -12,8 +12,8 @@ const ProductCard = ({ image, title, description, onClick }: Props) => {
     <S.Card>
       <S.ProductImage src={image} />
       <S.Title>{title}</S.Title>
-      <S.Description>{description}</S.Description>
-      <S.Button onClick={onClick}>Mais detalhes</S.Button>
+      <S.ProductDescription>{description}</S.ProductDescription>
+      <S.ProductButton onClick={onClick}>Mais detalhes</S.ProductButton>
     </S.Card>
   )
 }

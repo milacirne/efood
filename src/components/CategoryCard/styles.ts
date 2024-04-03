@@ -33,7 +33,6 @@ export const Tag = styled.div`
 
 export const Infos = styled.div`
   padding: 8px;
-  font-size: 14px;
   border-right: 1px solid ${colors.red};
   border-bottom: 1px solid ${colors.red};
   border-left: 1px solid ${colors.red};
@@ -61,6 +60,7 @@ export const Rating = styled.div`
 
 export const Description = styled.p`
   font-weight: 400;
+  font-size: 14px;
   line-height: 22px;
   margin-bottom: 16px;
   min-height: 110px;
@@ -72,6 +72,8 @@ export const Button = styled.button`
   cursor: pointer;
   padding: 4px 6px;
   font-weight: 700;
+  font-size: 14px;
+  line-height: 16.41px;
   border: none;
   transition: 0.5s all ease;
 
