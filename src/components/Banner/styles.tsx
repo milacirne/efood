@@ -3,7 +3,6 @@ import { colors } from '../../styles'
 
 type BannerProps = {
   image: string
-  titleIsBold: boolean
 }
 
 export const BannerStyle = styled.div<BannerProps>`

@@ -1,6 +1,8 @@
+import { useDispatch } from 'react-redux'
 import * as S from './styles'
 import close from '../../assets/icons/close.png'
 import { CategoryItemType } from '../../pages/Category'
+import { add, open } from '../../store/reducers/cart'
 
 interface ModalState {
   isVisible: boolean
@@ -8,16 +10,25 @@ interface ModalState {
   product: CategoryItemType | null
 }
 
+export const formatPrice = (price = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
 const Modal = ({ isVisible, onClick, product }: ModalState) => {
-  if (!product) {
-    return null
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    if (product) {
+      dispatch(add(product))
+      dispatch(open())
+    }
   }
 
-  const formatPrice = (price = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(price)
+  if (!product) {
+    return null
   }
 
   return (
@@ -32,7 +43,7 @@ const Modal = ({ isVisible, onClick, product }: ModalState) => {
             <br />
             Serve: de {product.porcao}
           </p>
-          <S.ModalButton>
+          <S.ModalButton onClick={addToCart}>
             Adicionar ao carrinho - {formatPrice(product.preco)}
           </S.ModalButton>
         </S.ModalText>

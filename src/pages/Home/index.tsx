@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useGetHomeItemsQuery } from '../../services/api'
 import Body from '../../components/Body'
 import Header from '../../components/Header'
 
@@ -23,32 +23,24 @@ export type HomeItemType = {
 }
 
 const Home = () => {
-  const [categories, setCategories] = useState<HomeItemType[]>([])
+  const { data: categories } = useGetHomeItemsQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to fetch data')
-        }
-        return res.json()
-      })
-      .then((data) => setCategories(data))
-  }, [])
-
-  return (
-    <>
-      <Header />
-      <Body
-        data={categories}
-        type="homeCards"
-        columns="repeat(2, 1fr)"
-        rows="repeat(3, auto)"
-        columnGap="80px"
-        rowGap="48px"
-      />
-    </>
-  )
+  if (categories) {
+    return (
+      <>
+        <Header />
+        <Body
+          data={categories}
+          type="homeCards"
+          columns="repeat(2, 1fr)"
+          rows="repeat(3, auto)"
+          columnGap="80px"
+          rowGap="48px"
+        />
+      </>
+    )
+  }
+  return <h4>Carregando...</h4>
 }
 
 export default Home
