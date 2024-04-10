@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Card = styled.div`
   background-color: ${colors.white};
@@ -46,6 +46,10 @@ export const NameRating = styled.div`
 
   h3 {
     font-size: 18px;
+
+    @media (max-width: ${breakpoints.smallTablet}) {
+      font-size: 14px;
+    }
   }
 `
 
@@ -64,6 +68,19 @@ export const Description = styled.p`
   line-height: 22px;
   margin-bottom: 16px;
   min-height: 110px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    min-height: 154px;
+  }
+
+  @media (max-width: ${breakpoints.smallTablet}) {
+    min-height: 220px;
+    font-size: 13px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    min-height: auto;
+  }
 `
 
 export const Button = styled.button`

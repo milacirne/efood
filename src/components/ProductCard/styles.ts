@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Image } from '../CategoryCard/styles'
 import { Button, Description } from '../CategoryCard/styles'
 
@@ -8,6 +8,7 @@ export const Card = styled.div`
   color: ${colors.darkBeige};
   padding: 8px;
   border-radius: 8px;
+  overflow: auto;
 `
 
 export const ProductImage = styled(Image)`
@@ -23,8 +24,20 @@ export const Title = styled.h3`
 `
 
 export const ProductDescription = styled(Description)`
-  min-height: 176px;
   margin-bottom: 8px;
+  min-height: 176px;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    min-height: 154px;
+  }
+
+  @media (max-width: ${breakpoints.smallTablet}) {
+    min-height: 220px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    min-height: auto;
+  }
 `
 
 export const ProductButton = styled(Button)`

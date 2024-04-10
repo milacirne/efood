@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 type BannerProps = {
   image: string
@@ -13,10 +13,19 @@ export const BannerStyle = styled.div<BannerProps>`
   background-size: cover;
   background-position: 88% 49%;
 
+  @media (max-width: ${breakpoints.tablet}) {
+    padding: 36px;
+  }
+
   h1 {
     font-size: 32px;
     font-weight: 900;
     line-height: 37.5px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 28px;
+      font-weight: 700;
+    }
   }
 
   & > h1:first-child {
