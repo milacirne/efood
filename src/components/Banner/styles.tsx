@@ -13,8 +13,12 @@ export const BannerStyle = styled.div<BannerProps>`
   background-size: cover;
   background-position: 88% 49%;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 24px 120px 32px;
+  }
+
   @media (max-width: ${breakpoints.tablet}) {
-    padding: 36px;
+    padding: 24px 36px;
   }
 
   h1 {
