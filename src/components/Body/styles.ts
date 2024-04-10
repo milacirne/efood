@@ -6,23 +6,16 @@ export interface ListProps {
   rows: string
   columnGap: string
   rowGap: string
+  margin: 'home' | 'category'
 }
 
-export const Container = styled.div`
-  padding: 80px 171px 120px;
+export const BodyContent = styled.div`
   background-color: ${colors.beige};
-
-  @media (max-width: ${breakpoints.desktop}) {
-    padding: 60px 120px 100px;
-  }
-
-  @media (max-width: ${breakpoints.tablet}) {
-    padding: 36px;
-  }
 `
 
 export const List = styled.ul<ListProps>`
   display: grid;
+  margin: ${(props) => (props.margin === 'home' ? '80px 0' : '56px 0')};
   grid-template-columns: ${({ columns }) => columns};
   grid-template-rows: ${({ rows }) => rows};
   column-gap: ${({ columnGap }) => columnGap};

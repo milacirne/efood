@@ -74,7 +74,7 @@ export const Description = styled.p`
   }
 
   @media (max-width: ${breakpoints.smallTablet}) {
-    min-height: 220px;
+    min-height: 176px;
     font-size: 13px;
   }
 

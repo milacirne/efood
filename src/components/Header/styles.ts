@@ -2,25 +2,36 @@ import styled from 'styled-components'
 import { breakpoints, colors } from '../../styles'
 import background from '../../assets/background.png'
 
-export const HeaderContainer = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const HeaderBar = styled.header`
   background-image: url(${background});
-  padding: 40px 171px 65.5px;
-  color: ${colors.red};
-  font-weight: 900;
-  font-size: 18px;
+  padding: 40px 0 65.5px;
 
   @media (max-width: ${breakpoints.desktop}) {
     font-size: 16px;
-    padding: 40px 120px;
+    padding: 40px 0;
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    padding: 150px 36px 36px;
+    padding: 150px 0 36px;
     position: relative;
     font-size: 14px;
+  }
+
+  div {
+    color: ${colors.red};
+    font-weight: 900;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      font-size: 16px;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 14px;
+    }
   }
 
   li {
@@ -57,10 +68,12 @@ export const HeaderContainer = styled.header`
     @media (max-width: ${breakpoints.desktop}) {
       font-size: 28px;
       margin-top: 100px;
+      line-height: 30px;
     }
 
     @media (max-width: ${breakpoints.tablet}) {
       font-size: 18px;
+      line-height: 22px;
       line-height: 22px;
     }
   }

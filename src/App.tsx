@@ -13,10 +13,8 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <GlobalStyle />
-        <div className="container">
-          <AppRoutes />
-          <Footer />
-        </div>
+        <AppRoutes />
+        <Footer />
         <Cart />
       </BrowserRouter>
     </Provider>

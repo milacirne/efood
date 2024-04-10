@@ -32,6 +32,7 @@ const Category = () => {
           rows="repeat(2, auto)"
           columnGap="40px"
           rowGap="32px"
+          margin="category"
         />
       </>
     )

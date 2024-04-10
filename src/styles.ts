@@ -23,9 +23,17 @@ export const GlobalStyle = createGlobalStyle`
   text-decoration: none;
   }
 
+  body {
+    background-color: ${colors.beige};
+  }
+
   .container {
-    max-width: 1366px;
+    max-width: 1024px;
     width: 100%;
     margin: 0 auto;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      max-width: 80%;
+    }
   }
 `

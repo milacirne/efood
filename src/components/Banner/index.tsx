@@ -13,8 +13,10 @@ const Banner = () => {
     <>
       {category && (
         <BannerStyle image={category?.capa}>
-          <h1>{category?.tipo}</h1>
-          <h1>{category?.titulo}</h1>
+          <div className="container">
+            <h1>{category?.tipo}</h1>
+            <h1>{category?.titulo}</h1>
+          </div>
         </BannerStyle>
       )}
     </>

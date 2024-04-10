@@ -32,7 +32,7 @@ export const ProductDescription = styled(Description)`
   }
 
   @media (max-width: ${breakpoints.smallTablet}) {
-    min-height: 220px;
+    min-height: 176px;
   }
 
   @media (max-width: ${breakpoints.tablet}) {

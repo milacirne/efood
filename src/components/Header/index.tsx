@@ -33,22 +33,31 @@ const Header = () => {
 
   return (
     <>
-      <S.HeaderContainer className={location.pathname === '/' ? 'isHome' : ''}>
-        <li className={isCategoryPage ? '' : 'invisible'}>
-          <Link to="/">
-            <a>{categoryRestaurantTitle}</a>
-          </Link>
-        </li>
-        <li>
-          <Link to="/">
-            <S.Logo src={logo} />
-          </Link>
-        </li>
-        <h2 className={isCategoryPage ? 'invisible' : ''}>{homeHeaderText}</h2>
-        <li className={isCategoryPage ? '' : 'invisible'}>
-          <a onClick={openCart}>{cartRestaurantTitle}</a>
-        </li>
-      </S.HeaderContainer>
+      <S.HeaderBar className={location.pathname === '/' ? 'isHome' : ''}>
+        <div
+          className="container"
+          style={{
+            flexDirection: location.pathname === '/' ? 'column' : 'row'
+          }}
+        >
+          <li className={isCategoryPage ? '' : 'invisible'}>
+            <Link to="/">
+              <a>{categoryRestaurantTitle}</a>
+            </Link>
+          </li>
+          <li>
+            <Link to="/">
+              <S.Logo src={logo} />
+            </Link>
+          </li>
+          <h2 className={isCategoryPage ? 'invisible' : ''}>
+            {homeHeaderText}
+          </h2>
+          <li className={isCategoryPage ? '' : 'invisible'}>
+            <a onClick={openCart}>{cartRestaurantTitle}</a>
+          </li>
+        </div>
+      </S.HeaderBar>
     </>
   )
 }

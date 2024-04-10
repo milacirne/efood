@@ -12,7 +12,15 @@ interface BodyProps extends ListProps {
   data: HomeItemType[] | CategoryItemType[]
 }
 
-const Body = ({ data, type, columns, rows, columnGap, rowGap }: BodyProps) => {
+const Body = ({
+  data,
+  type,
+  columns,
+  rows,
+  columnGap,
+  rowGap,
+  margin
+}: BodyProps) => {
   const [isVisible, setIsVisible] = useState(false)
   const [selectedProduct, setSelectedProduct] =
     useState<CategoryItemType | null>(null)
@@ -37,45 +45,48 @@ const Body = ({ data, type, columns, rows, columnGap, rowGap }: BodyProps) => {
   }
 
   return (
-    <S.Container>
-      <S.List
-        columns={columns}
-        rows={rows}
-        columnGap={columnGap}
-        rowGap={rowGap}
-      >
-        {type === 'homeCards' && data
-          ? (data as HomeItemType[]).map((homeItem: HomeItemType) => (
-              <Category
-                key={homeItem.id}
-                image={homeItem.capa}
-                tags={getCategoryTags(homeItem)}
-                title={homeItem.titulo}
-                rating={homeItem.avaliacao}
-                description={homeItem.descricao}
-                to={`/category/${homeItem.id}`}
-              />
-            ))
-          : type === 'categoryCards' && data
-            ? (data as CategoryItemType[]).map(
-                (categoryItem: CategoryItemType) => (
-                  <Product
-                    key={categoryItem.id}
-                    image={categoryItem.foto}
-                    title={categoryItem.nome}
-                    description={categoryItem.descricao}
-                    onClick={() => handleProductClick(categoryItem)}
-                  />
+    <div className="container">
+      <S.BodyContent>
+        <S.List
+          columns={columns}
+          rows={rows}
+          columnGap={columnGap}
+          rowGap={rowGap}
+          margin={margin}
+        >
+          {type === 'homeCards' && data
+            ? (data as HomeItemType[]).map((homeItem: HomeItemType) => (
+                <Category
+                  key={homeItem.id}
+                  image={homeItem.capa}
+                  tags={getCategoryTags(homeItem)}
+                  title={homeItem.titulo}
+                  rating={homeItem.avaliacao}
+                  description={homeItem.descricao}
+                  to={`/category/${homeItem.id}`}
+                />
+              ))
+            : type === 'categoryCards' && data
+              ? (data as CategoryItemType[]).map(
+                  (categoryItem: CategoryItemType) => (
+                    <Product
+                      key={categoryItem.id}
+                      image={categoryItem.foto}
+                      title={categoryItem.nome}
+                      description={categoryItem.descricao}
+                      onClick={() => handleProductClick(categoryItem)}
+                    />
+                  )
                 )
-              )
-            : null}
-        <Modal
-          isVisible={isVisible}
-          onClick={() => setIsVisible(false)}
-          product={selectedProduct}
-        />
-      </S.List>
-    </S.Container>
+              : null}
+          <Modal
+            isVisible={isVisible}
+            onClick={() => setIsVisible(false)}
+            product={selectedProduct}
+          />
+        </S.List>
+      </S.BodyContent>
+    </div>
   )
 }
 

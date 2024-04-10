@@ -36,6 +36,7 @@ const Home = () => {
           rows="repeat(3, auto)"
           columnGap="80px"
           rowGap="48px"
+          margin="home"
         />
       </>
     )
