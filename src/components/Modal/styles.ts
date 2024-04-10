@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Button } from '../CategoryCard/styles'
 
 export const Modal = styled.div`
@@ -30,10 +30,18 @@ export const Modal = styled.div`
 export const ModalContent = styled.div`
   display: flex;
   max-width: 1024px;
+  color: blue;
   padding: 32px;
   z-index: 1;
   background-color: ${colors.red};
   position: relative;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    display: flex;
+    flex-direction: column;
+    max-width: 360px;
+    padding: 28px;
+  }
 `
 export const Close = styled.img`
   position: absolute;
@@ -47,6 +55,11 @@ export const ModalImage = styled.img`
   width: 280px;
   height: 280px;
   object-fit: cover;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    width: 304px;
+    height: 180px;
+  }
 `
 
 export const ModalText = styled.div`
@@ -55,10 +68,19 @@ export const ModalText = styled.div`
   color: ${colors.white};
   margin-left: 24px;
 
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-left: 0;
+    margin-top: 16px;
+  }
+
   h4 {
     font-size: 18px;
     font-weight: 900;
     line-height: 21.09px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 16px;
+    }
   }
 
   p {
@@ -66,6 +88,10 @@ export const ModalText = styled.div`
     font-weight: 400;
     font-size: 14px;
     line-height: 22px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      font-size: 12px;
+    }
   }
 `
 
