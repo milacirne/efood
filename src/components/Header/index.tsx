@@ -1,61 +1,60 @@
-import { Link, useLocation, useParams } from 'react-router-dom'
-import * as S from './styles'
-import logo from '../../assets/logo.png'
-import { open } from '../../store/reducers/cart'
+import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
+import { open } from '../../store/reducers/cart'
+import * as S from './styles'
+import logo from '../../assets/logo.png'
+import { useState } from 'react'
 
 const Header = () => {
-  const { id } = useParams()
-  const location = useLocation()
   const { items } = useSelector((state: RootReducer) => state.cart)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const location = useLocation()
 
   const dispatch = useDispatch()
-
   const openCart = () => {
     dispatch(open())
   }
 
-  const homeHeaderText =
-    location.pathname === '/' ? (
-      <>
-        Viva experiências gastronômicas <br /> no conforto da sua casa
-      </>
-    ) : (
-      ''
-    )
-
-  const isCategoryPage = location.pathname.startsWith(`/category/${id}`)
-  const categoryRestaurantTitle = isCategoryPage ? 'Restaurantes' : ''
-  const cartRestaurantTitle = isCategoryPage
-    ? `${items.length} produto(s) no carrinho`
-    : ''
-
   return (
     <>
       <S.HeaderBar className={location.pathname === '/' ? 'isHome' : ''}>
-        <div
-          className="container"
-          style={{
-            flexDirection: location.pathname === '/' ? 'column' : 'row'
-          }}
-        >
-          <li className={isCategoryPage ? '' : 'invisible'}>
-            <Link to="/">
-              <a>{categoryRestaurantTitle}</a>
-            </Link>
-          </li>
-          <li>
-            <Link to="/">
-              <S.Logo src={logo} />
-            </Link>
-          </li>
-          <h2 className={isCategoryPage ? 'invisible' : ''}>
-            {homeHeaderText}
-          </h2>
-          <li className={isCategoryPage ? '' : 'invisible'}>
-            <a onClick={openCart}>{cartRestaurantTitle}</a>
-          </li>
+        <div className="container">
+          <S.HomeItems className={location.pathname === '/' ? '' : 'invisible'}>
+            <S.Logo src={logo} />
+            <p>
+              Viva experiências gastronômicas <br /> no conforto da sua casa
+            </p>
+          </S.HomeItems>
+          <S.CategoryItems
+            className={location.pathname === '/' ? 'invisible' : ''}
+          >
+            <li>
+              <S.Hamburguer onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <span />
+                <span />
+                <span />
+              </S.Hamburguer>
+            </li>
+            <li className="restaurants">
+              <Link to="/">Restaurantes</Link>
+            </li>
+            <li>
+              <Link to="/">
+                <S.Logo src={logo} />
+              </Link>
+            </li>
+            <S.CartButton onClick={openCart}>
+              {items.length} <span>produto(s) no carrinho</span>
+              <span className="fa-solid fa-cart-shopping" />
+            </S.CartButton>
+          </S.CategoryItems>
+          <S.NavMobile className={isMenuOpen ? 'is-open' : ''}>
+            <li>
+              <Link to="/">Restaurantes</Link>
+            </li>
+          </S.NavMobile>
         </div>
       </S.HeaderBar>
     </>

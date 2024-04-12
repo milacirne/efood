@@ -1,95 +1,32 @@
 import styled from 'styled-components'
-import { breakpoints, colors } from '../../styles'
 import background from '../../assets/background.png'
+import { breakpoints, colors } from '../../styles'
 
 export const HeaderBar = styled.header`
   background-image: url(${background});
   padding: 40px 0 65.5px;
 
-  @media (max-width: ${breakpoints.desktop}) {
-    font-size: 16px;
+  &.isHome {
     padding: 40px 0;
-  }
+`
 
-  @media (max-width: ${breakpoints.tablet}) {
-    padding: 150px 0 36px;
-    position: relative;
-    font-size: 14px;
-  }
+export const HomeItems = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
-  div {
+  p {
     color: ${colors.red};
-    font-weight: 900;
-    font-size: 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    @media (max-width: ${breakpoints.desktop}) {
-      font-size: 16px;
-    }
-
-    @media (max-width: ${breakpoints.tablet}) {
-      font-size: 14px;
-    }
-  }
-
-  li {
-    width: 197px;
-
-    @media (max-width: ${breakpoints.desktop}) {
-      width: 189px;
-    }
-
-    @media (max-width: ${breakpoints.tablet}) {
-      width: auto;
-    }
-  }
-
-  li:nth-child(2) {
-    display: flex;
-    justify-content: center;
-  }
-
-  a {
-    cursor: pointer;
-    color: ${colors.red};
-  }
-
-  h2 {
     margin-top: 138.5px;
-    font-size: 36px;
     font-weight: 900;
-    color: ${colors.red};
+    font-size: 36px;
     line-height: 42.19px;
     text-align: center;
-    padding: 0;
 
     @media (max-width: ${breakpoints.desktop}) {
       font-size: 28px;
       margin-top: 100px;
       line-height: 30px;
-    }
-
-    @media (max-width: ${breakpoints.tablet}) {
-      font-size: 18px;
-      line-height: 22px;
-      line-height: 22px;
-    }
-  }
-
-  .invisible {
-    display: none;
-  }
-
-  &.isHome {
-    padding: 40px 0;
-    flex-direction: column;
-    color: blue;
-
-    li:nth-child(2) {
-      width: auto;
-      height: 24px;
     }
   }
 `
@@ -99,11 +36,84 @@ export const Logo = styled.img`
   width: 125px;
   height: 57.5px;
   justify-content: center;
+`
+
+export const CategoryItems = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 21.09px;
+
+  li {
+    width: 197px;
+    cursor: pointer;
+    color: ${colors.red};
+
+    a {
+      color: ${colors.red};
+    }
+  }
+
+  li:nth-child(3) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .restaurants {
+    @media (max-width: ${breakpoints.tablet}) {
+      display: none;
+    }
+  }
+
+  @media (min-width: ${breakpoints.tablet}) {
+    > li:first-child {
+      display: none;
+    }
+  }
+`
+
+export const Hamburguer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 34px;
+
+  span {
+    height: 3px;
+    width: 100%;
+    margin-bottom: 4px;
+    background-color: ${colors.red};
+  }
+`
+
+export const CartButton = styled.li`
+  text-align: end;
+
+  @media (min-width: ${breakpoints.tablet}) {
+    > span:last-child {
+      display: none;
+    }
+  }
 
   @media (max-width: ${breakpoints.tablet}) {
-    position: absolute;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%);
+    > span:first-child {
+      display: none;
+    }
+  }
+`
+
+export const NavMobile = styled.nav`
+  display: none;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21.09px;
+
+  a {
+    color: ${colors.red};
+  }
+
+  &.is-open {
+    display: block;
   }
 `

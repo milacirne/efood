@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../store'
-import { close, remove } from '../store/reducers/cart'
-import { formatPrice } from '../components/Modal'
+import { RootReducer } from '../../store'
+import { close, remove } from '../../store/reducers/cart'
+import { formatPrice } from '../Modal'
 import * as S from './styles'
 
 const Cart = () => {

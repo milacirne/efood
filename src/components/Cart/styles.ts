@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { colors } from '../styles'
-import { Button } from '../components/CategoryCard/styles'
-import litter from '../assets/icons/litter.png'
+import { colors } from '../../styles'
+import { Button } from '../CategoryCard/styles'
+import litter from '../../assets/icons/litter.png'
 
 export const Overlay = styled.div`
   position: absolute;
