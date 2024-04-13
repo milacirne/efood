@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { breakpoints, colors } from '../../styles'
 import { Image } from '../CategoryCard/styles'
-import { Button, Description } from '../CategoryCard/styles'
+import { Description } from '../CategoryCard/styles'
 
 export const Card = styled.div`
   background-color: ${colors.red};
@@ -37,17 +37,5 @@ export const ProductDescription = styled(Description)`
 
   @media (max-width: ${breakpoints.tablet}) {
     min-height: auto;
-  }
-`
-
-export const ProductButton = styled(Button)`
-  color: ${colors.red};
-  background-color: ${colors.darkBeige};
-  width: 100%;
-  padding: 4px 0;
-
-  &:hover {
-    background-color: ${colors.beige};
-    color: ${colors.red};
   }
 `

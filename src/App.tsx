@@ -6,7 +6,7 @@ import AppRoutes from './routes'
 
 import { GlobalStyle } from './styles'
 import Footer from './components/Footer'
-import Cart from './components/Cart'
+import Cart from './pages/Cart'
 
 function App() {
   return (

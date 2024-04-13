@@ -82,19 +82,3 @@ export const Description = styled.p`
     min-height: auto;
   }
 `
-
-export const Button = styled.button`
-  color: ${colors.darkBeige};
-  background-color: ${colors.red};
-  cursor: pointer;
-  padding: 4px 6px;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16.41px;
-  border: none;
-  transition: 0.5s all ease;
-
-  &:hover {
-    color: ${colors.beige};
-  }
-`

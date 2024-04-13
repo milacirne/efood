@@ -1,3 +1,4 @@
+import Button from '../Button'
 import * as S from './styles'
 
 type Props = {
@@ -13,7 +14,14 @@ const ProductCard = ({ image, title, description, onClick }: Props) => {
       <S.ProductImage src={image} />
       <S.Title>{title}</S.Title>
       <S.ProductDescription>{description}</S.ProductDescription>
-      <S.ProductButton onClick={onClick}>Mais detalhes</S.ProductButton>
+      <Button
+        width="100%"
+        backgroundColor="beige"
+        customPadding="4px 0"
+        onClick={onClick}
+      >
+        Mais detalhes
+      </Button>
     </S.Card>
   )
 }

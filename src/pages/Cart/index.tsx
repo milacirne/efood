@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
-import { close, remove } from '../../store/reducers/cart'
-import { formatPrice } from '../Modal'
+import { remove, close } from '../../store/reducers/cart'
 import * as S from './styles'
+import Aside from '../../components/Aside'
+import { formatPrice } from '../../components/Modal'
+import Button from '../../components/Button'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-  const { isOpen, items } = useSelector((state: RootReducer) => state.cart)
   const dispatch = useDispatch()
-
-  const closeCart = () => {
-    dispatch(close())
-  }
+  const navigate = useNavigate()
+  const { items } = useSelector((state: RootReducer) => state.cart)
 
   const getTotalPrice = () => {
     return items.reduce((acumulador, valorAtual) => {
@@ -22,10 +22,14 @@ const Cart = () => {
     dispatch(remove(id))
   }
 
+  const handleContinueToDelivery = () => {
+    navigate('/delivery')
+    dispatch(close())
+  }
+
   return (
-    <S.CartContainer className={isOpen ? 'is-open' : ''}>
-      <S.Overlay onClick={closeCart} />
-      <S.Sidebar>
+    <Aside hasTitle={false}>
+      <>
         {items.map((item) => (
           <S.CartItem key={item.id}>
             <img src={item.foto} />
@@ -37,12 +41,19 @@ const Cart = () => {
           </S.CartItem>
         ))}
         <S.Price>
-          <p>Valor total</p>
-          <p>{formatPrice(getTotalPrice())}</p>
+          <span>Valor total</span>
+          <span>{formatPrice(getTotalPrice())}</span>
         </S.Price>
-        <S.CartButton>Continuar com a entrega</S.CartButton>
-      </S.Sidebar>
-    </S.CartContainer>
+        <Button
+          width="100%"
+          backgroundColor="beige"
+          customPadding="4px 0"
+          onClick={handleContinueToDelivery}
+        >
+          Continuar com a entrega
+        </Button>
+      </>
+    </Aside>
   )
 }
 

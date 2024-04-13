@@ -3,6 +3,7 @@ import * as S from './styles'
 import close from '../../assets/icons/close.png'
 import { CategoryItemType } from '../../pages/Category'
 import { add, open } from '../../store/reducers/cart'
+import Button from '../Button'
 
 interface ModalState {
   isVisible: boolean
@@ -43,9 +44,14 @@ const Modal = ({ isVisible, onClick, product }: ModalState) => {
             <br />
             Serve: de {product.porcao}
           </p>
-          <S.ModalButton onClick={addToCart}>
+          <Button
+            width="auto"
+            backgroundColor="beige"
+            customPadding="4px 6.95px"
+            onClick={addToCart}
+          >
             Adicionar ao carrinho - {formatPrice(product.preco)}
-          </S.ModalButton>
+          </Button>
         </S.ModalText>
       </S.ModalContent>
       <div className="overlay" onClick={onClick}></div>

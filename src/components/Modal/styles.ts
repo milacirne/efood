@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { breakpoints, colors } from '../../styles'
-import { Button } from '../CategoryCard/styles'
 
 export const Modal = styled.div`
   position: fixed;
@@ -92,18 +91,5 @@ export const ModalText = styled.div`
     @media (max-width: ${breakpoints.tablet}) {
       font-size: 12px;
     }
-  }
-`
-
-export const ModalButton = styled(Button)`
-  color: ${colors.red};
-  background-color: ${colors.darkBeige};
-  padding: 4px 6.95px;
-  width: 218px;
-  margin: 0;
-
-  &:hover {
-    background-color: ${colors.beige};
-    color: ${colors.red};
   }
 `
