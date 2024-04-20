@@ -1,10 +1,13 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { RootReducer } from '../../store'
-import { open } from '../../store/reducers/cart'
-import * as S from './styles'
-import logo from '../../assets/logo.png'
 import { useState } from 'react'
+
+import { RootReducer } from '../../store'
+import { openCart } from '../../store/reducers/cart'
+
+import logo from '../../assets/logo.png'
+
+import * as S from './styles'
 
 const Header = () => {
   const { items } = useSelector((state: RootReducer) => state.cart)
@@ -13,8 +16,8 @@ const Header = () => {
   const location = useLocation()
 
   const dispatch = useDispatch()
-  const openCart = () => {
-    dispatch(open())
+  const handleOpenCart = () => {
+    dispatch(openCart())
   }
 
   return (
@@ -22,7 +25,9 @@ const Header = () => {
       <S.HeaderBar className={location.pathname === '/' ? 'isHome' : ''}>
         <div className="container">
           <S.HomeItems className={location.pathname === '/' ? '' : 'invisible'}>
-            <S.Logo src={logo} />
+            <h1>
+              <S.Logo src={logo} alt="EFOOD" />
+            </h1>
             <p>
               Viva experiências gastronômicas <br /> no conforto da sua casa
             </p>
@@ -38,21 +43,31 @@ const Header = () => {
               </S.Hamburguer>
             </li>
             <li className="restaurants">
-              <Link to="/">Restaurantes</Link>
+              <Link title="Voltar para a página de Restaurantes" to="/">
+                Restaurantes
+              </Link>
             </li>
             <li>
               <Link to="/">
-                <S.Logo src={logo} />
+                <h1>
+                  <S.Logo
+                    src={logo}
+                    alt="EFOOD"
+                    title="Voltar para a página inicial"
+                  />
+                </h1>
               </Link>
             </li>
-            <S.CartButton onClick={openCart}>
+            <S.CartButton onClick={handleOpenCart} title="Abrir o carrinho">
               {items.length} <span>produto(s) no carrinho</span>
               <span className="fa-solid fa-cart-shopping" />
             </S.CartButton>
           </S.CategoryItems>
           <S.NavMobile className={isMenuOpen ? 'is-open' : ''}>
             <li>
-              <Link to="/">Restaurantes</Link>
+              <Link title="Voltar para a página de Restaurantes" to="/">
+                Restaurantes
+              </Link>
             </li>
           </S.NavMobile>
         </div>

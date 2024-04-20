@@ -34,6 +34,13 @@ export const CartItem = styled.div`
     right: 8px;
     cursor: pointer;
   }
+
+  .empty-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: ${colors.white};
+    text-align: center;
+  }
 `
 
 export const Price = styled.div`

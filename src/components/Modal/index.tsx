@@ -1,21 +1,18 @@
 import { useDispatch } from 'react-redux'
-import * as S from './styles'
-import close from '../../assets/icons/close.png'
-import { CategoryItemType } from '../../pages/Category'
-import { add, open } from '../../store/reducers/cart'
+
 import Button from '../Button'
+
+import { add, openCart } from '../../store/reducers/cart'
+import { parseToBrl } from '../../utils'
+
+import close from '../../assets/icons/close.png'
+
+import * as S from './styles'
 
 interface ModalState {
   isVisible: boolean
   onClick: () => void
   product: CategoryItemType | null
-}
-
-export const formatPrice = (price = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(price)
 }
 
 const Modal = ({ isVisible, onClick, product }: ModalState) => {
@@ -24,7 +21,7 @@ const Modal = ({ isVisible, onClick, product }: ModalState) => {
   const addToCart = () => {
     if (product) {
       dispatch(add(product))
-      dispatch(open())
+      dispatch(openCart())
     }
   }
 
@@ -34,9 +31,9 @@ const Modal = ({ isVisible, onClick, product }: ModalState) => {
 
   return (
     <S.Modal className={isVisible ? 'visible' : ''}>
-      <S.ModalContent>
+      <S.ModalContent title="Clique no botão para adicionar este item ao carrinho">
         <S.Close src={close} onClick={onClick} />
-        <S.ModalImage src={product.foto} />
+        <S.ModalImage src={product.foto} alt={product.nome} />
         <S.ModalText>
           <h4>{product.nome}</h4>
           <p>
@@ -50,7 +47,7 @@ const Modal = ({ isVisible, onClick, product }: ModalState) => {
             customPadding="4px 6.95px"
             onClick={addToCart}
           >
-            Adicionar ao carrinho - {formatPrice(product.preco)}
+            Adicionar ao carrinho - {parseToBrl(product.preco)}
           </Button>
         </S.ModalText>
       </S.ModalContent>

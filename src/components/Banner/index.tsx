@@ -1,13 +1,17 @@
 import { useParams } from 'react-router-dom'
-import { BannerStyle } from './styles'
+
 import { useGetCategoryBannerQuery } from '../../services/api'
 
-const Banner = () => {
-  const { id } = useParams()
+import { BannerStyle } from './styles'
 
-  const { data: category } = useGetCategoryBannerQuery(
-    typeof id === 'string' ? id : ''
-  )
+type Params = {
+  id: string
+}
+
+const Banner = () => {
+  const { id } = useParams() as Params
+
+  const { data: category } = useGetCategoryBannerQuery(id)
 
   return (
     <>

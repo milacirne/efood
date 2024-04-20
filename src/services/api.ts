@@ -1,9 +1,41 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-import { HomeItemType } from '../pages/Home'
-import { CategoryItemType } from '../pages/Category'
 
-interface CardapioResponse {
-  cardapio: CategoryItemType[] // Defina corretamente o tipo de CategoryItemType conforme necessário
+interface MenuResponse {
+  cardapio: CategoryItemType[]
+}
+
+type Product = {
+  id: number
+  price: number
+}
+
+type PurchasePayload = {
+  products: Product[]
+  delivery: {
+    receiver: string
+    address: {
+      description: string
+      city: string
+      zipCode: string
+      number: number
+      complement?: string
+    }
+  }
+  payment: {
+    card: {
+      name: string
+      number: string
+      code: number
+      expires: {
+        month: number
+        year: number
+      }
+    }
+  }
+}
+
+type PurchaseResponse = {
+  orderId: string
 }
 
 const api = createApi({
@@ -16,10 +48,17 @@ const api = createApi({
     }),
     getCategoryProducts: builder.query<CategoryItemType[], string>({
       query: (id) => `restaurantes/${id}`,
-      transformResponse: (response: CardapioResponse) => response.cardapio
+      transformResponse: (response: MenuResponse) => response.cardapio
     }),
     getHomeItems: builder.query<HomeItemType[], void>({
       query: () => 'restaurantes'
+    }),
+    purchase: builder.mutation<PurchaseResponse, PurchasePayload>({
+      query: (body) => ({
+        url: 'checkout',
+        method: 'POST',
+        body
+      })
     })
   })
 })
@@ -27,6 +66,7 @@ const api = createApi({
 export const {
   useGetCategoryBannerQuery,
   useGetCategoryProductsQuery,
-  useGetHomeItemsQuery
+  useGetHomeItemsQuery,
+  usePurchaseMutation
 } = api
 export default api

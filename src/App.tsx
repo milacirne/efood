@@ -1,12 +1,15 @@
 import { Provider } from 'react-redux'
+import { BrowserRouter } from 'react-router-dom'
+
+import AppRoutes from './routes'
 import { store } from './store'
 
-import { BrowserRouter } from 'react-router-dom'
-import AppRoutes from './routes'
-
-import { GlobalStyle } from './styles'
 import Footer from './components/Footer'
 import Cart from './pages/Cart'
+
+import { GlobalStyle } from './styles'
+import Delivery from './pages/Delivery'
+import Payment from './pages/Payment'
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
         <AppRoutes />
         <Footer />
         <Cart />
+        <Delivery />
+        <Payment />
       </BrowserRouter>
     </Provider>
   )

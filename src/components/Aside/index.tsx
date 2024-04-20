@@ -1,25 +1,28 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { close } from '../../store/reducers/cart'
+import { useDispatch } from 'react-redux'
+
+import { closeCart } from '../../store/reducers/cart'
+import { closeDelivery, closePayment } from '../../store/reducers/checkout'
+
 import { AsideContainer, AsideStyleProps, Overlay, Sidebar } from './styles'
-import { RootReducer } from '../../store'
 
 interface Props extends AsideStyleProps {
   children: JSX.Element
   title?: string
-  hasTitle: boolean
+  className?: string
 }
 
-const Aside = ({ children, title, hasTitle }: Props) => {
-  const { isOpen } = useSelector((state: RootReducer) => state.cart)
+const Aside = ({ children, title, hasTitle, className }: Props) => {
   const dispatch = useDispatch()
 
-  const closeCart = () => {
-    dispatch(close())
+  const handleClose = () => {
+    dispatch(closeCart())
+    dispatch(closeDelivery())
+    dispatch(closePayment())
   }
 
   return (
-    <AsideContainer className={isOpen ? 'is-open' : ''} hasTitle={hasTitle}>
-      <Overlay onClick={closeCart} />
+    <AsideContainer hasTitle={hasTitle} className={className}>
+      <Overlay onClick={handleClose} />
       <Sidebar>
         <h2>{title}</h2>
         {children}

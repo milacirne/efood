@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
-import * as S from './styles'
-import starRating from '../../assets/star-review.png'
+
 import Button from '../Button'
+
+import starRating from '../../assets/star-review.png'
+
+import * as S from './styles'
 
 type Props = {
   image: string
@@ -21,8 +24,10 @@ const CategoryCard = ({
   to
 }: Props) => {
   return (
-    <S.Card>
-      <S.Image src={image} />
+    <S.Card
+      title={`Clique no botão para saber mais sobre o restaurante ${title}`}
+    >
+      <S.Image src={image} alt={title} />
       <S.TagsContainer>
         {tags.map((tag) => (
           <S.Tag key={tag}>{tag}</S.Tag>

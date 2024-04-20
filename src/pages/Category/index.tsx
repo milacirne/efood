@@ -1,24 +1,20 @@
 import { useParams } from 'react-router-dom'
-import { useGetCategoryProductsQuery } from '../../services/api'
+
 import Body from '../../components/Body'
 import Header from '../../components/Header'
 import Banner from '../../components/Banner'
 
-export type CategoryItemType = {
-  foto: string
-  preco: number
-  id: number
-  nome: string
-  descricao: string
-  porcao: string
+import { useGetCategoryProductsQuery } from '../../services/api'
+import Loader from '../../components/Loader'
+
+type Params = {
+  id: string
 }
 
 const Category = () => {
-  const { id } = useParams()
+  const { id } = useParams() as Params
 
-  const { data: products } = useGetCategoryProductsQuery(
-    typeof id === 'string' ? id : ''
-  )
+  const { data: products } = useGetCategoryProductsQuery(id)
 
   if (products) {
     return (
@@ -37,7 +33,7 @@ const Category = () => {
       </>
     )
   }
-  return <h4>Carregando...</h4>
+  return <Loader />
 }
 
 export default Category

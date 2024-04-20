@@ -1,26 +1,8 @@
-import { useGetHomeItemsQuery } from '../../services/api'
-import Body from '../../components/Body'
 import Header from '../../components/Header'
+import Body from '../../components/Body'
 
-export type HomeItemType = {
-  id: number
-  titulo: string
-  destacado: boolean
-  tipo: string
-  avaliacao: number
-  descricao: string
-  capa: string
-  cardapio: [
-    {
-      foto: string
-      preco: number
-      id: number
-      nome: string
-      descricao: string
-      porcao: string
-    }
-  ]
-}
+import { useGetHomeItemsQuery } from '../../services/api'
+import Loader from '../../components/Loader'
 
 const Home = () => {
   const { data: categories } = useGetHomeItemsQuery()
@@ -41,7 +23,7 @@ const Home = () => {
       </>
     )
   }
-  return <h4>Carregando...</h4>
+  return <Loader />
 }
 
 export default Home

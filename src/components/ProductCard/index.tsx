@@ -10,8 +10,8 @@ type Props = {
 
 const ProductCard = ({ image, title, description, onClick }: Props) => {
   return (
-    <S.Card>
-      <S.ProductImage src={image} />
+    <S.Card title={`Clique no botão para saber mais detalhes sobre ${title}`}>
+      <S.ProductImage src={image} alt={title} />
       <S.Title>{title}</S.Title>
       <S.ProductDescription>{description}</S.ProductDescription>
       <Button

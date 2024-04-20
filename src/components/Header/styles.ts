@@ -8,6 +8,7 @@ export const HeaderBar = styled.header`
 
   &.isHome {
     padding: 40px 0;
+  }
 `
 
 export const HomeItems = styled.div`
@@ -48,17 +49,21 @@ export const CategoryItems = styled.ul`
 
   li {
     width: 197px;
-    cursor: pointer;
     color: ${colors.red};
 
     a {
       color: ${colors.red};
+      cursor: pointer;
     }
   }
 
   li:nth-child(3) {
     display: flex;
     justify-content: center;
+  }
+
+  li:last-child {
+    cursor: pointer;
   }
 
   .restaurants {

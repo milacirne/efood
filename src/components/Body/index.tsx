@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import * as S from './styles'
+
 import Category from '../CategoryCard'
-import { HomeItemType } from '../../pages/Home'
 import Product from '../ProductCard'
 import Modal from '../Modal'
+
 import { ListProps } from './styles'
-import { CategoryItemType } from '../../pages/Category'
+
+import * as S from './styles'
 
 interface BodyProps extends ListProps {
   type: 'homeCards' | 'categoryCards'
