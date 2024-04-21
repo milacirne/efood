@@ -33,8 +33,16 @@ const Cart = () => {
     dispatch(closeCart())
   }
 
+  const handleClickOverlay = () => {
+    dispatch(closeCart())
+  }
+
   return (
-    <Aside className={isOpen ? 'is-open' : ''} hasTitle={false}>
+    <Aside
+      className={isOpen ? 'is-open' : ''}
+      hasTitle={false}
+      onClick={handleClickOverlay}
+    >
       {items.length > 0 ? (
         <>
           {items.map((item) => (

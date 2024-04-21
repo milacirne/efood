@@ -1,14 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux'
 import InputMask from 'react-input-mask'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 import Aside from '../../components/Aside'
 import Button from '../../components/Button'
 
 import { RootReducer } from '../../store'
 import { openCart } from '../../store/reducers/cart'
-import { closeDelivery, openPayment } from '../../store/reducers/checkout'
-
-import { ValidationSchema } from '../../utils/validationSchema'
+import {
+  closeDelivery,
+  openPayment,
+  saveDeliveryData
+} from '../../store/reducers/checkout'
 
 import { Row, InputGroup } from './../../components/Aside/styles'
 
@@ -16,7 +20,50 @@ const Delivery = () => {
   const { deliveryIsOpen } = useSelector((state: RootReducer) => state.checkout)
   const dispatch = useDispatch()
 
-  const form = ValidationSchema()
+  const form = useFormik({
+    initialValues: {
+      client: '',
+      address: '',
+      city: '',
+      cep: '',
+      number: '',
+      aditional: ''
+    },
+    validationSchema: Yup.object({
+      client: Yup.string()
+        .min(5, 'O nome precisa ter pelo menos 5 caracteres')
+        .required('O nome é obrigatório'),
+      address: Yup.string()
+        .matches(
+          /^[a-zA-Z\s]+$/,
+          'O formato do endereço deve ser: "Rua/Avenida"'
+        )
+        .required('O endereço é obrigatório'),
+      city: Yup.string()
+        .min(2, 'A cidade deve ter pelo menos 2 caracteres')
+        .matches(/^[a-zA-Z\s]+$/, 'A cidade só pode conter letras e espaços')
+        .required('A cidade é obrigatória'),
+      cep: Yup.string()
+        .matches(/^\d{5}-\d{3}$/, 'O formato do CEP deve ser: "XXXXX-XXX"')
+        .required('O CEP é obrigatório'),
+      number: Yup.string()
+        .matches(
+          /^\d+[a-zA-Z]*$/,
+          'O número do endereço deve ser um número inteiro positivo e pode conter letras'
+        )
+        .required('O número do endereço é obrigatório'),
+      aditional: Yup.string()
+        .max(50, 'O complemento não deve exceder 50 caracteres')
+        .matches(
+          /^[a-zA-Z0-9\s,.'-]*$/,
+          'O complemento pode conter letras, números, espaços, vírgulas, pontos, apóstrofos e hifens'
+        )
+        .notRequired()
+    }),
+    onSubmit: (values) => {
+      dispatch(saveDeliveryData(values))
+    }
+  })
 
   const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched
@@ -36,8 +83,17 @@ const Delivery = () => {
     dispatch(closeDelivery())
   }
 
+  const handleClickOverlay = () => {
+    dispatch(closeDelivery())
+  }
+
   return (
-    <Aside title="Entrega" hasTitle className={deliveryIsOpen ? 'is-open' : ''}>
+    <Aside
+      title="Entrega"
+      hasTitle
+      className={deliveryIsOpen ? 'is-open' : ''}
+      onClick={handleClickOverlay}
+    >
       <form onSubmit={form.handleSubmit}>
         <Row>
           <InputGroup>

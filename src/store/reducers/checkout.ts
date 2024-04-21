@@ -1,48 +1,70 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+type DeliveryFormData = {
+  client: string
+  address: string
+  city: string
+  cep: string
+  number: string
+  aditional?: string
+}
 
 type CheckoutState = {
-  checkoutIsOpen: boolean
   deliveryIsOpen: boolean
   paymentIsOpen: boolean
+  successIsOpen: boolean
+  deliveryFormData: DeliveryFormData
 }
 
 const initialState: CheckoutState = {
-  checkoutIsOpen: false,
   deliveryIsOpen: false,
-  paymentIsOpen: false
+  paymentIsOpen: false,
+  successIsOpen: false,
+  deliveryFormData: {
+    client: '',
+    address: '',
+    city: '',
+    cep: '',
+    number: '',
+    aditional: ''
+  }
 }
 
 const checkoutSlice = createSlice({
   name: 'checkout',
   initialState,
   reducers: {
-    openCheckout: (state) => {
-      state.checkoutIsOpen = true
-    },
-    closeCheckout: (state) => {
-      state.checkoutIsOpen = false
-    },
     openDelivery: (state) => {
       state.deliveryIsOpen = true
     },
     closeDelivery: (state) => {
       state.deliveryIsOpen = false
     },
+    saveDeliveryData: (state, action: PayloadAction<DeliveryFormData>) => {
+      state.deliveryFormData = action.payload
+    },
     openPayment: (state) => {
       state.paymentIsOpen = true
     },
     closePayment: (state) => {
       state.paymentIsOpen = false
+    },
+    openSuccess: (state) => {
+      state.successIsOpen = true
+    },
+    closeSuccess: (state) => {
+      state.successIsOpen = false
     }
   }
 })
 
 export const {
-  openCheckout,
-  closeCheckout,
   openDelivery,
   closeDelivery,
+  saveDeliveryData,
   openPayment,
-  closePayment
+  closePayment,
+  openSuccess,
+  closeSuccess
 } = checkoutSlice.actions
 export default checkoutSlice.reducer
