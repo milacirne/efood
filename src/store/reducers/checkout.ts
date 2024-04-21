@@ -12,14 +12,12 @@ type DeliveryFormData = {
 type CheckoutState = {
   deliveryIsOpen: boolean
   paymentIsOpen: boolean
-  successIsOpen: boolean
   deliveryFormData: DeliveryFormData
 }
 
 const initialState: CheckoutState = {
   deliveryIsOpen: false,
   paymentIsOpen: false,
-  successIsOpen: false,
   deliveryFormData: {
     client: '',
     address: '',
@@ -48,12 +46,6 @@ const checkoutSlice = createSlice({
     },
     closePayment: (state) => {
       state.paymentIsOpen = false
-    },
-    openSuccess: (state) => {
-      state.successIsOpen = true
-    },
-    closeSuccess: (state) => {
-      state.successIsOpen = false
     }
   }
 })
@@ -63,8 +55,6 @@ export const {
   closeDelivery,
   saveDeliveryData,
   openPayment,
-  closePayment,
-  openSuccess,
-  closeSuccess
+  closePayment
 } = checkoutSlice.actions
 export default checkoutSlice.reducer

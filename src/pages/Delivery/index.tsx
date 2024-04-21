@@ -79,8 +79,8 @@ const Delivery = () => {
   }
 
   const openPaymentDetails = () => {
-    dispatch(openPayment())
     dispatch(closeDelivery())
+    dispatch(openPayment())
   }
 
   const handleClickOverlay = () => {

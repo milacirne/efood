@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import InputMask from 'react-input-mask'
 import { useFormik } from 'formik'
@@ -8,12 +8,7 @@ import Aside from '../../components/Aside'
 import Button from '../../components/Button'
 
 import { RootReducer } from '../../store'
-import {
-  openDelivery,
-  closePayment,
-  openSuccess,
-  closeSuccess
-} from '../../store/reducers/checkout'
+import { openDelivery, closePayment } from '../../store/reducers/checkout'
 import { clearCart } from '../../store/reducers/cart'
 
 import { usePurchaseMutation } from '../../services/api'
@@ -21,12 +16,17 @@ import { usePurchaseMutation } from '../../services/api'
 import { parseToBrl } from '../../utils'
 
 import { Row, InputGroup } from './../../components/Aside/styles'
+import { useNavigate } from 'react-router-dom'
 
 const Payment = () => {
   const { items } = useSelector((state: RootReducer) => state.cart)
-  const { paymentIsOpen, deliveryFormData, successIsOpen } = useSelector(
+  const { paymentIsOpen, deliveryFormData } = useSelector(
     (state: RootReducer) => state.checkout
   )
+
+  const [successIsOpen, setSuccessIsOpen] = useState(false)
+
+  const navigate = useNavigate()
 
   const [purchase, { isSuccess, data }] = usePurchaseMutation()
 
@@ -80,7 +80,6 @@ const Payment = () => {
         .required('O ano de vencimento do cartão é obrigatório')
     }),
     onSubmit: (values) => {
-      console.log('Dados enviados:', values)
       purchase({
         products: items.map((item) => ({
           id: item.id,
@@ -125,7 +124,9 @@ const Payment = () => {
   }
 
   const handleCloseSuccess = () => {
-    dispatch(closeSuccess())
+    setSuccessIsOpen(false)
+    dispatch(closePayment())
+    navigate('/')
   }
 
   const handleClickPaymentOverlay = () => {
@@ -134,14 +135,12 @@ const Payment = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(openSuccess())
+      setSuccessIsOpen(true)
       dispatch(closePayment())
       dispatch(clearCart())
+      console.log(isSuccess)
     }
   }, [isSuccess, dispatch])
-
-  console.log('Pagamento está', paymentIsOpen)
-  console.log('Sucesso está', successIsOpen)
 
   return (
     <>
