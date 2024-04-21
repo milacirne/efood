@@ -28,7 +28,7 @@ const Payment = () => {
 
   const navigate = useNavigate()
 
-  const [purchase, { isSuccess, data }] = usePurchaseMutation()
+  const [purchase, { isSuccess, data, reset }] = usePurchaseMutation()
 
   const dispatch = useDispatch()
 
@@ -127,6 +127,8 @@ const Payment = () => {
     setSuccessIsOpen(false)
     dispatch(closePayment())
     navigate('/')
+    reset()
+    form.resetForm()
   }
 
   const handleClickPaymentOverlay = () => {
@@ -138,7 +140,6 @@ const Payment = () => {
       setSuccessIsOpen(true)
       dispatch(closePayment())
       dispatch(clearCart())
-      console.log(isSuccess)
     }
   }, [isSuccess, dispatch])
 
