@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import InputMask from 'react-input-mask'
+import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -8,38 +9,32 @@ import Aside from '../../components/Aside'
 import Button from '../../components/Button'
 
 import { RootReducer } from '../../store'
-import { openDelivery, closePayment } from '../../store/reducers/checkout'
+import {
+  openDelivery,
+  closePayment,
+  openSuccess,
+  closeSuccess
+} from '../../store/reducers/checkout'
 import { clearCart } from '../../store/reducers/cart'
 
 import { usePurchaseMutation } from '../../services/api'
 
-import { parseToBrl } from '../../utils'
+import { getTotalPrice, parseToBrl } from '../../utils'
 
 import { Row, InputGroup } from './../../components/Aside/styles'
-import { useNavigate } from 'react-router-dom'
 
 const Payment = () => {
   const { items } = useSelector((state: RootReducer) => state.cart)
-  const { paymentIsOpen, deliveryFormData } = useSelector(
+  const { paymentIsOpen, deliveryFormData, successIsOpen } = useSelector(
     (state: RootReducer) => state.checkout
   )
 
-  const [successIsOpen, setSuccessIsOpen] = useState(false)
-
   const navigate = useNavigate()
 
-  const [purchase, { isSuccess, data, reset }] = usePurchaseMutation()
+  const [purchase, { isSuccess, data, isLoading, reset }] =
+    usePurchaseMutation()
 
   const dispatch = useDispatch()
-
-  const getTotalPrice = () => {
-    return items.reduce((accumulator, currentValue) => {
-      if (currentValue.preco) {
-        return (accumulator += currentValue.preco)
-      }
-      return 0
-    }, 0)
-  }
 
   const form = useFormik({
     initialValues: {
@@ -124,7 +119,7 @@ const Payment = () => {
   }
 
   const handleCloseSuccess = () => {
-    setSuccessIsOpen(false)
+    dispatch(closeSuccess())
     dispatch(closePayment())
     navigate('/')
     reset()
@@ -137,7 +132,7 @@ const Payment = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setSuccessIsOpen(true)
+      dispatch(openSuccess())
       dispatch(closePayment())
       dispatch(clearCart())
     }
@@ -179,7 +174,7 @@ const Payment = () => {
         </Aside>
       ) : (
         <Aside
-          title={`Pagamento - Valor a pagar ${parseToBrl(getTotalPrice())}`}
+          title={`Pagamento - Valor a pagar ${parseToBrl(getTotalPrice(items))}`}
           hasTitle
           className={paymentIsOpen ? 'is-open' : ''}
           onClick={handleClickPaymentOverlay}
@@ -264,7 +259,7 @@ const Payment = () => {
               marginBottom="8px"
               type="submit"
             >
-              Finalizar pagamento
+              {isLoading ? 'Finalizando pagamento...' : 'Finalizar pagamento'}
             </Button>
             <Button
               width="100%"

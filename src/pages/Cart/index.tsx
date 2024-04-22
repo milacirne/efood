@@ -7,22 +7,13 @@ import { openDelivery } from '../../store/reducers/checkout'
 import Aside from '../../components/Aside'
 import Button from '../../components/Button'
 
-import { parseToBrl } from '../../utils'
+import { getTotalPrice, parseToBrl } from '../../utils'
 
 import * as S from './styles'
 
 const Cart = () => {
   const dispatch = useDispatch()
   const { items, isOpen } = useSelector((state: RootReducer) => state.cart)
-
-  const getTotalPrice = () => {
-    return items.reduce((accumulator, currentValue) => {
-      if (currentValue.preco) {
-        return (accumulator += currentValue.preco)
-      }
-      return 0
-    }, 0)
-  }
 
   const removeItem = (id: number) => {
     dispatch(remove(id))
@@ -57,7 +48,7 @@ const Cart = () => {
           ))}
           <S.Price>
             <span>Valor total</span>
-            <span>{parseToBrl(getTotalPrice())}</span>
+            <span>{parseToBrl(getTotalPrice(items))}</span>
           </S.Price>
           <Button
             width="100%"

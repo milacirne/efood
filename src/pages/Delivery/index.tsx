@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import InputMask from 'react-input-mask'
 import { useFormik } from 'formik'
@@ -17,7 +18,11 @@ import {
 import { Row, InputGroup } from './../../components/Aside/styles'
 
 const Delivery = () => {
-  const { deliveryIsOpen } = useSelector((state: RootReducer) => state.checkout)
+  const { deliveryIsOpen, successIsOpen } = useSelector(
+    (state: RootReducer) => state.checkout
+  )
+
+  const [shouldResetForm, setShouldResetForm] = useState(false)
   const dispatch = useDispatch()
 
   const form = useFormik({
@@ -86,6 +91,19 @@ const Delivery = () => {
   const handleClickOverlay = () => {
     dispatch(closeDelivery())
   }
+
+  useEffect(() => {
+    if (successIsOpen) {
+      setShouldResetForm(true)
+    }
+  }, [successIsOpen])
+
+  useEffect(() => {
+    if (shouldResetForm) {
+      form.resetForm()
+      setShouldResetForm(false)
+    }
+  }, [shouldResetForm, form])
 
   return (
     <Aside
