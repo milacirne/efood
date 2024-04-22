@@ -29,6 +29,12 @@ export const HomeItems = styled.div`
       margin-top: 100px;
       line-height: 30px;
     }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      margin-top: 80px;
+      font-size: 24px;
+      line-height: 28px;
+    }
   }
 `
 
