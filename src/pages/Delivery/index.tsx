@@ -92,6 +92,13 @@ const Delivery = () => {
     dispatch(closeDelivery())
   }
 
+  const buttonDisabled = () => {
+    if (!form.isValid || !Object.keys(form.touched).length) {
+      return true
+    }
+    return false
+  }
+
   useEffect(() => {
     if (successIsOpen) {
       setShouldResetForm(true)
@@ -203,7 +210,7 @@ const Delivery = () => {
           marginBottom="8px"
           onClick={openPaymentDetails}
           type="button"
-          disabled={!form.isValid}
+          disabled={buttonDisabled()}
         >
           Continuar com o pagamento
         </Button>
