@@ -203,6 +203,7 @@ const Delivery = () => {
           marginBottom="8px"
           onClick={openPaymentDetails}
           type="button"
+          disabled={!form.isValid}
         >
           Continuar com o pagamento
         </Button>

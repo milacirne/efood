@@ -8,6 +8,7 @@ export interface Props {
   customPadding: '4px 0' | '4px 6.95px' | '4px 6px'
   marginBottom?: string
   type?: 'submit' | 'button'
+  disabled?: boolean
 }
 
 const Button = ({
@@ -17,7 +18,8 @@ const Button = ({
   backgroundColor,
   customPadding,
   marginBottom,
-  type
+  type,
+  disabled
 }: Props) => {
   return (
     <ButtonContainer
@@ -27,6 +29,7 @@ const Button = ({
       customPadding={customPadding}
       marginBottom={marginBottom}
       type={type}
+      disabled={disabled}
     >
       {children}
     </ButtonContainer>
